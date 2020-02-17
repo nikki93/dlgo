@@ -134,3 +134,20 @@ class GameState():
         else:
             next_board = self.board
         return GameState(next_board, self.next_player.other, self, move)
+
+    @classmethod
+    def new_game(cls, board_size):
+        if isinstance(board_size, int):
+            board_size = (board_size, board_size)
+        board = Board(*board_size)
+        return GameState(board, Player.black, None, None)
+
+    def is_over(self):
+        if self.last_move is None:
+            return False
+        if self.last_move.is_resign:
+            return True
+        second_last_move = self.previous_state.last_move
+        if second_last_move is None:
+            return False
+        return self.last_move.is_pass and second_last_move.is_pass
