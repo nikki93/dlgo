@@ -156,7 +156,7 @@ class GameState():
         if not move.is_play:
             return False
         next_board = copy.deepcopy(self.board)
-        next_board.place_stone(move.point)
+        next_board.place_stone(player, move.point)
         return next_board.get_go_string(move.point).num_liberties == 0
 
     @property
@@ -173,7 +173,7 @@ class GameState():
         while past_state is not None:
             if past_state.situation == next_situation:
                 return True
-            past_state = paste_state.previous_state
+            past_state = past_state.previous_state
         return False
 
     def is_valid_move(self, move):
