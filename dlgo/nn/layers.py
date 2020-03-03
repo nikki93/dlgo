@@ -30,7 +30,7 @@ class Layer:
         self.input_delta = None
         self.output_delta = None
 
-    def connect(self, layer)
+    def connect(self, layer):
         self.previous = layer
         layer.next = self
 
